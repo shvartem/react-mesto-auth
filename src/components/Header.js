@@ -8,9 +8,13 @@ function Header(props) {
         aria-label="Логотип &laquo;Место. Россия&raquo;"
         rel="noreferrer"
       ></a>
-      <a href="/sign-up" rel="noreferrer" className="header__sign-button">
-        Регистрация
-      </a>
+      {props.loggedIn ? (
+        ''
+      ) : (
+        <a href="/sign-up" rel="noreferrer" className="header__register-link">
+          Регистрация
+        </a>
+      )}
     </header>
   );
 }

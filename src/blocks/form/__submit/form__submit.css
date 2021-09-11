@@ -1,7 +1,10 @@
 .form__submit {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   cursor: pointer;
   width: 100%;
-  padding: 13px 124px 14px;
+  padding: 13px 0 14px;
   background: #000;
   border: 1px solid #000;
   border-radius: 2px;

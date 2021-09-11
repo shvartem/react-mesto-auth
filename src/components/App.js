@@ -15,6 +15,8 @@ import DeleteCardPopup from './DeleteCardPopup';
 import ProtectedRoute from './ProtectedRoute';
 import { Route, Switch } from 'react-router';
 import Login from './Login';
+import Register from './Register';
+import InfoToolTip from './InfoTooltip';
 
 function App() {
   // стейты пользователя и карточек
@@ -217,7 +219,7 @@ function App() {
           <div className="page__container">
             <Header />
             <Switch>
-              <Route path="/add-place">
+              {/* <Route path="/add-place">
                 <AddPlacePopup
                   isLoading={isAddPlacePopupLoading}
                   onSetIsLoading={setIsAddPlacePopupLoading}
@@ -264,10 +266,14 @@ function App() {
                   card={selectedCard}
                   onClose={handleClosePopup}
                 />
-              </Route>
+              </Route> */}
 
               <Route path="/sign-in">
                 <Login />
+              </Route>
+
+              <Route path="/sign-up">
+                <Register />
               </Route>
 
               <ProtectedRoute
@@ -282,10 +288,11 @@ function App() {
                 onCardLike={handleCardLike}
                 onCardDelete={handleDeleteClick}
               />
+
+              <Footer />
             </Switch>
 
-            {/* 
-            <Main
+            {/* <Main
               cards={currentCards}
               onAddPlace={handleAddPlaceClick}
               onEditAvatar={handleEditAvatarClick}
@@ -293,14 +300,10 @@ function App() {
               onCardClick={handleCardClick}
               onCardLike={handleCardLike}
               onCardDelete={handleDeleteClick}
-            />
-             */}
+            /> */}
 
-            {/*              
-            <Footer />
-            */}
+            {/* <Footer /> */}
 
-            {/* 
             <AddPlacePopup
               isLoading={isAddPlacePopupLoading}
               onSetIsLoading={setIsAddPlacePopupLoading}
@@ -308,9 +311,7 @@ function App() {
               onClose={handleClosePopup}
               onAddPlace={handleAddPlaceSubmit}
             />
-            */}
 
-            {/* 
             <EditAvatarPopup
               isLoading={isEditAvatarPopupLoading}
               onSetIsLoading={setIsEditAvatarPopupLoading}
@@ -318,9 +319,7 @@ function App() {
               onClose={handleClosePopup}
               onUpdateAvatar={handleUpdateAvatar}
             />
-             */}
 
-            {/* 
             <DeleteCardPopup
               isLoading={isDeleteCardPopupLoading}
               onSetIsLoading={setDeleteCardPopupIsLoading}
@@ -329,9 +328,7 @@ function App() {
               onDeleteCard={handleDeleteCard}
               card={selectedCard}
             />
-            */}
 
-            {/* 
             <EditProfilePopup
               isLoading={isEditProfilePopupLoading}
               onSetIsLoading={setIsEditProfilePopupLoading}
@@ -339,15 +336,14 @@ function App() {
               onClose={handleClosePopup}
               onUpdateUser={handleUpdateUser}
             />
-            */}
 
-            {/* 
             <ImagePopup
               isOpen={isImagePopupOpen}
               card={selectedCard}
               onClose={handleClosePopup}
             />
-             */}
+
+            <InfoToolTip onClose={handleClosePopup} />
           </div>
         </div>
       </div>
