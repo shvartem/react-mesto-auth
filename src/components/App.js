@@ -48,6 +48,8 @@ function App() {
   const [isDeleteCardPopupLoading, setDeleteCardPopupIsLoading] =
     React.useState(false);
 
+  const [isAuthPopupOpen, setIsAuthPopupOpen] = React.useState(false);
+
   // стейт выбранной карточки
   const [selectedCard, setSelectedCard] = React.useState(null);
 
@@ -87,6 +89,8 @@ function App() {
 
     setIsImagePopupOpen(false);
     setSelectedCard(null);
+
+    setIsAuthPopupOpen(false);
   }
 
   // функция закрытия закрытия попапа по клику на оверлей или кнопку закрытия
@@ -343,7 +347,12 @@ function App() {
               onClose={handleClosePopup}
             />
 
-            <InfoToolTip onClose={handleClosePopup} />
+            <InfoToolTip
+              name="info-tool-tip"
+              isOpen={isAuthPopupOpen}
+              onClose={handleClosePopup}
+              loggedIn={loggedIn}
+            />
           </div>
         </div>
       </div>
