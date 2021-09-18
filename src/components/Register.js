@@ -1,17 +1,21 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import * as auth from '../utils/auth';
 
 function Register(props) {
-  const [userData, setUserData] = React.useState({
+  const {
+    setIsAuthPopupOpen, onRegister, setCurrentRoute, history,
+  } = props;
+
+  const [registerData, setRegisterData] = useState({
     email: '',
     password: '',
   });
 
-  function handleChangeUserData(evt) {
+  function handleChangeRegisterData(evt) {
     const { name, value } = evt.target;
-    console.log(name, value);
-    setUserData({
-      ...userData,
+
+    setRegisterData({
+      ...registerData,
       [name]: value,
     });
   }
@@ -19,8 +23,29 @@ function Register(props) {
   function handleSubmit(evt) {
     evt.preventDefault();
 
-    auth.register(userData);
+    auth.register(registerData)
+      .then((data) => {
+        onRegister(true);
+        setIsAuthPopupOpen(true);
+
+        setRegisterData({
+          email: '',
+          password: '',
+        });
+
+        history.push('/signin');
+      })
+      .catch((err) => {
+        onRegister(false);
+        setIsAuthPopupOpen(true);
+
+        console.error(err);
+      });
   }
+
+  useEffect(() => {
+    setCurrentRoute('/signup');
+  }, []);
 
   return (
     <div className="sign__container">
@@ -32,8 +57,8 @@ function Register(props) {
             className="form__item form__item_place_sign"
             placeholder="Email"
             name="email"
-            value={userData.email || ''}
-            onChange={handleChangeUserData}
+            value={registerData.email || ''}
+            onChange={handleChangeRegisterData}
           />
 
           <input
@@ -41,17 +66,18 @@ function Register(props) {
             className="form__item form__item_place_sign"
             placeholder="Пароль"
             name="password"
-            value={userData.password || ''}
-            onChange={handleChangeUserData}
+            value={registerData.password || ''}
+            onChange={handleChangeRegisterData}
           />
         </fieldset>
 
-        <button className="form__submit form__button_place_sign">
+        <button type="submit" className="form__submit form__button_place_sign">
           Зарегистрироваться
         </button>
       </form>
       <p className="sign__registred">
-        Уже зарегистрированы?{' '}
+        Уже зарегистрированы?
+        {' '}
         <a href="/sign-in" rel="noreferrer" className="sign__login-link">
           Войти
         </a>

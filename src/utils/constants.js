@@ -47,7 +47,7 @@ const ESC_KEYCODE = 'Escape';
 
 const myToken = 'f2403b1e-b069-4c41-a72d-caa156ab74c7';
 const myId = '553193e6af6a1a8f2737e6f2';
-const baseUrl = 'https://nomoreparties.co/v1/cohort-26';
+const baseApiUrl = 'https://nomoreparties.co/v1/cohort-26';
 
 // Экспорт переменных
 
@@ -67,5 +67,5 @@ export {
   // formCardElement,
   myToken,
   myId,
-  baseUrl,
+  baseApiUrl,
 };

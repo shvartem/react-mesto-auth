@@ -1,9 +1,9 @@
-import React from 'react';
+import { useRef } from 'react';
 
 function ImagePopup(props) {
   const { card, isOpen, onClose } = props;
 
-  const imageFallbackContainer = React.useRef(null);
+  const imageFallbackContainer = useRef(null);
 
   return (
     <div
@@ -15,7 +15,7 @@ function ImagePopup(props) {
           type="button"
           className="popup__close"
           aria-label="Закрыть окно редактирования"
-        ></button>
+        />
         <figure className="figure" ref={imageFallbackContainer}>
           {card && (
             <img

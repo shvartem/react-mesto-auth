@@ -1,11 +1,11 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 
 function ProtectedRoute({ component: Component, ...props }) {
   return (
     <Route>
-      {/* {props.loggedIn ? <Component {...props} /> : <Redirect to="./sign-in" />} */}
-      <Component {...props} />
+      {props.loggedIn ? <Component {...props} /> : <Redirect to="./sign-in" />}
     </Route>
   );
 }

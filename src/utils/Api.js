@@ -1,4 +1,4 @@
-import { myToken, baseUrl } from './constants';
+import { myToken, baseApiUrl } from './constants';
 
 class Api {
   constructor({ baseUrl, headers }) {
@@ -16,13 +16,13 @@ class Api {
 
   getUserInfoFromServer() {
     return fetch(`${this._baseUrl}/users/me`, { headers: this._headers }).then(
-      (response) => this._checkPromiseStatus(response)
+      (response) => this._checkPromiseStatus(response),
     );
   }
 
   getInitialCardsFromServer() {
     return fetch(`${this._baseUrl}/cards`, { headers: this._headers }).then(
-      (response) => this._checkPromiseStatus(response)
+      (response) => this._checkPromiseStatus(response),
     );
   }
 
@@ -80,7 +80,7 @@ class Api {
 // const baseUrl = 'https://nomoreparties.co/v1/cohort-26';
 
 const api = new Api({
-  baseUrl,
+  baseUrl: baseApiUrl,
   headers: {
     authorization: myToken,
     'Content-Type': 'application/json',

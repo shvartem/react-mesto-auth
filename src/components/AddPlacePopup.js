@@ -1,8 +1,10 @@
-import React from 'react';
+import { useState, useEffect } from 'react';
 import PopupWithForm from './PopupWithForm';
 
 function AddPlacePopup(props) {
-  const [newPlace, setNewPlace] = React.useState({
+  const { isOpen, isLoading, onClose } = props;
+
+  const [newPlace, setNewPlace] = useState({
     title: '',
     image: '',
   });
@@ -25,12 +27,12 @@ function AddPlacePopup(props) {
     });
   }
 
-  React.useEffect(() => {
+  useEffect(() => {
     setNewPlace({
       title: '',
       image: '',
     });
-  }, [props.isOpen]);
+  }, [isOpen]);
 
   return (
     <PopupWithForm
@@ -39,9 +41,9 @@ function AddPlacePopup(props) {
       ariaLabel="Создать карточку"
       buttonText="Создать"
       buttonIsLoadingText="Создание"
-      isLoading={props.isLoading}
-      isOpen={props.isOpen}
-      onClose={props.onClose}
+      isLoading={isLoading}
+      isOpen={isOpen}
+      onClose={onClose}
       onSubmit={handleSubmit}
     >
       <input
@@ -56,7 +58,7 @@ function AddPlacePopup(props) {
         onChange={handleChangeNewPlace}
         required
       />
-      <span className="card-title-error form__item-error"></span>
+      <span className="card-title-error form__item-error" />
       <input
         type="url"
         id="card-image"
@@ -67,7 +69,7 @@ function AddPlacePopup(props) {
         onChange={handleChangeNewPlace}
         required
       />
-      <span className="card-image-error form__item-error"></span>
+      <span className="card-image-error form__item-error" />
     </PopupWithForm>
   );
 }

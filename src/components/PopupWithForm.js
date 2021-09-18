@@ -24,7 +24,7 @@ function PopupWithForm(props) {
           type="button"
           className="popup__close"
           aria-label="Закрыть окно"
-        ></button>
+        />
         <form
           action="#"
           method="POST"

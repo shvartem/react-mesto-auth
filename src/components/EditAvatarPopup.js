@@ -1,8 +1,10 @@
-import React from 'react';
+import { createRef, useEffect } from 'react';
 import PopupWithForm from './PopupWithForm';
 
 function EditAvatarPopup(props) {
-  const profileAvatarRef = React.createRef();
+  const profileAvatarRef = createRef();
+
+  const { isOpen, isLoading, onClose } = props;
 
   function handleSubmit(evt) {
     evt.preventDefault();
@@ -14,9 +16,9 @@ function EditAvatarPopup(props) {
     });
   }
 
-  React.useEffect(() => {
+  useEffect(() => {
     profileAvatarRef.current.value = '';
-  }, [profileAvatarRef, props.isOpen]);
+  }, [profileAvatarRef, isOpen]);
 
   return (
     <PopupWithForm
@@ -25,9 +27,9 @@ function EditAvatarPopup(props) {
       ariaLabel="Сохранить новый аватар"
       buttonText="Сохранить"
       buttonIsLoadingText="Сохранение"
-      isLoading={props.isLoading}
-      isOpen={props.isOpen}
-      onClose={props.onClose}
+      isLoading={isLoading}
+      isOpen={isOpen}
+      onClose={onClose}
       onSubmit={handleSubmit}
     >
       <input
@@ -39,7 +41,7 @@ function EditAvatarPopup(props) {
         placeholder="Ссылка на новый аватар"
         required
       />
-      <span className="profile-avatar-error form__item-error"></span>
+      <span className="profile-avatar-error form__item-error" />
     </PopupWithForm>
   );
 }

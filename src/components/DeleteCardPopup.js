@@ -1,6 +1,8 @@
 import PopupWithForm from './PopupWithForm';
 
 function DeleteCardPopup(props) {
+  const { isOpen, isLoading, onClose } = props;
+
   function handleSubmit(evt) {
     evt.preventDefault();
 
@@ -16,9 +18,9 @@ function DeleteCardPopup(props) {
       ariaLabel="Удалить карточку"
       buttonText="Да"
       buttonIsLoadingText="Удаление"
-      isLoading={props.isLoading}
-      isOpen={props.isOpen}
-      onClose={props.onClose}
+      isLoading={isLoading}
+      isOpen={isOpen}
+      onClose={onClose}
       onSubmit={handleSubmit}
     />
   );

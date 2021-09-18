@@ -1,11 +1,13 @@
-import React from 'react';
-import { CurrentUserContext } from '../contexts/CurrentUserContext';
+import { useState, useEffect, useContext } from 'react';
+import CurrentUserContext from '../contexts/CurrentUserContext';
 import PopupWithForm from './PopupWithForm';
 
 function EditProfilePopup(props) {
-  const currentUser = React.useContext(CurrentUserContext);
+  const currentUser = useContext(CurrentUserContext);
 
-  const [userInfo, setUserInfo] = React.useState({
+  const { isOpen, isLoading, onClose } = props;
+
+  const [userInfo, setUserInfo] = useState({
     username: '',
     job: '',
   });
@@ -28,12 +30,12 @@ function EditProfilePopup(props) {
     });
   }
 
-  React.useEffect(() => {
+  useEffect(() => {
     setUserInfo({
       username: currentUser.name,
       job: currentUser.about,
     });
-  }, [currentUser, props.isOpen]);
+  }, [currentUser, isOpen]);
 
   return (
     <PopupWithForm
@@ -42,9 +44,9 @@ function EditProfilePopup(props) {
       ariaLabel="Сохранить профиль"
       buttonText="Сохранить"
       buttonIsLoadingText="Сохранение"
-      isLoading={props.isLoading}
-      isOpen={props.isOpen}
-      onClose={props.onClose}
+      isLoading={isLoading}
+      isOpen={isOpen}
+      onClose={onClose}
       onSubmit={handleSubmit}
     >
       <input
@@ -59,7 +61,7 @@ function EditProfilePopup(props) {
         onChange={handleChangeUserInfo}
         required
       />
-      <span className="username-input-error form__item-error"></span>
+      <span className="username-input-error form__item-error" />
       <input
         type="text"
         id="job-input"
@@ -72,7 +74,7 @@ function EditProfilePopup(props) {
         onChange={handleChangeUserInfo}
         required
       />
-      <span className="job-input-error form__item-error"></span>
+      <span className="job-input-error form__item-error" />
     </PopupWithForm>
   );
 }

@@ -3,7 +3,9 @@ import successfulAuthImage from '../images/successful-auth.svg';
 import failedAuthImage from '../images/failed-auth.svg';
 
 function InfoToolTip(props) {
-  const { name, isOpen, loggedIn, onClose } = props;
+  const {
+    name, isOpen, onSuccessRegister, onClose,
+  } = props;
 
   return (
     <div
@@ -15,14 +17,14 @@ function InfoToolTip(props) {
           type="button"
           className="popup__close"
           aria-label="Закрыть окно"
-        ></button>
+        />
         <img
-          src={loggedIn ? successfulAuthImage : failedAuthImage}
+          src={onSuccessRegister ? successfulAuthImage : failedAuthImage}
           alt=""
           className="popup__auth-image"
         />
         <p className="popup__auth-result">
-          {loggedIn
+          {onSuccessRegister
             ? 'Вы успешно зарегистрировались!'
             : 'Что-то пошло не так! Попробуйте ещё раз.'}
         </p>

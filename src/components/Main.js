@@ -1,9 +1,10 @@
-import React from 'react';
-import { CurrentUserContext } from '../contexts/CurrentUserContext';
+/* eslint-disable jsx-a11y/control-has-associated-label */
+import { useContext } from 'react';
+import CurrentUserContext from '../contexts/CurrentUserContext';
 import Card from './Card';
 
 function Main(props) {
-  const currentUser = React.useContext(CurrentUserContext);
+  const currentUser = useContext(CurrentUserContext);
   const { name, about, avatar } = currentUser;
 
   const {
@@ -39,28 +40,26 @@ function Main(props) {
             className="profile__edit-button"
             aria-label="Редактировать профиль"
             onClick={onEditProfile}
-          ></button>
+          />
         </div>
         <button
           type="button"
           className="profile__add-button"
           onClick={onAddPlace}
-        ></button>
+        />
       </section>
       <section className="content page__content">
         <ul className="cards">
-          {cards.map((card) => {
-            return (
-              <Card
-                key={card._id}
-                currentUser={currentUser}
-                card={card}
-                onCardClick={onCardClick}
-                onCardLike={onCardLike}
-                onCardDelete={onCardDelete}
-              />
-            );
-          })}
+          {cards.map((card) => (
+            <Card
+              key={card._id}
+              currentUser={currentUser}
+              card={card}
+              onCardClick={onCardClick}
+              onCardLike={onCardLike}
+              onCardDelete={onCardDelete}
+            />
+          ))}
         </ul>
       </section>
     </main>
