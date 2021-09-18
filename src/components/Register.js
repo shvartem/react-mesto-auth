@@ -3,7 +3,7 @@ import * as auth from '../utils/auth';
 
 function Register(props) {
   const {
-    setIsAuthPopupOpen, onRegister, setCurrentRoute, history,
+    isAuthPopupOpen, setIsAuthPopupOpen, successRegister, onRegister, setCurrentRoute, history,
   } = props;
 
   const [registerData, setRegisterData] = useState({
@@ -25,15 +25,13 @@ function Register(props) {
 
     auth.register(registerData)
       .then((data) => {
-        onRegister(true);
         setIsAuthPopupOpen(true);
+        onRegister(true);
 
         setRegisterData({
           email: '',
           password: '',
         });
-
-        history.push('/signin');
       })
       .catch((err) => {
         onRegister(false);
@@ -42,6 +40,13 @@ function Register(props) {
         console.error(err);
       });
   }
+
+  // эффект для перенаправления на страницу с авторизацией
+  // после удачной регистрации и закрытия попапа InfoToolTip
+
+  useEffect(() => {
+    if (successRegister && !isAuthPopupOpen) history.push('/signin');
+  }, [successRegister, isAuthPopupOpen, history]);
 
   useEffect(() => {
     setCurrentRoute('/signup');

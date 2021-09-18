@@ -3,7 +3,7 @@ import * as auth from '../utils/auth';
 
 function Login(props) {
   const {
-    loggedIn, onLogin, setEmail, setCurrentRoute, history,
+    loggedIn, setSuccessRegister, onLogin, setEmail, setCurrentRoute, history,
   } = props;
 
   const [loginData, setLoginData] = useState({
@@ -43,6 +43,7 @@ function Login(props) {
   }, [loggedIn]);
 
   useEffect(() => {
+    setSuccessRegister(false);
     setCurrentRoute('/signin');
   }, []);
 

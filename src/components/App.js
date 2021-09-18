@@ -277,6 +277,7 @@ function App() {
                 <Login
                   onLogin={setLoggedIn}
                   loggedIn={loggedIn}
+                  setSuccessRegister={setSuccessRegister}
                   setEmail={setCurrentEmail}
                   setCurrentRoute={setCurrentRoute}
                   history={history}
@@ -285,7 +286,9 @@ function App() {
 
               <Route path="/sign-up">
                 <Register
+                  isAuthPopupOpen={isAuthPopupOpen}
                   setIsAuthPopupOpen={setIsAuthPopupOpen}
+                  successRegister={successRegister}
                   onRegister={setSuccessRegister}
                   setCurrentRoute={setCurrentRoute}
                   history={history}
