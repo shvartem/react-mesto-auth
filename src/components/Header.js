@@ -8,9 +8,8 @@ function Header(props) {
 
   return (
     <header className="header section page__header">
-      <a
-        href="https://google.com"
-        target="_blank"
+      <Link
+        to="/"
         className="header__logo"
         aria-label="Логотип &laquo;Место. Россия&raquo;"
         rel="noreferrer"

@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import * as auth from '../utils/auth';
+import { Link } from 'react-router-dom';
 
-function Register(props) {
-  const {
-    isAuthPopupOpen, setIsAuthPopupOpen, successRegister, onRegister, setCurrentRoute, history,
-  } = props;
-
+function Register({
+  isAuthPopupOpen, setIsAuthPopupOpen, successRegister, onRegister, setCurrentRoute, history,
+}) {
   const [registerData, setRegisterData] = useState({
     email: '',
     password: '',
@@ -23,22 +21,7 @@ function Register(props) {
   function handleSubmit(evt) {
     evt.preventDefault();
 
-    auth.register(registerData)
-      .then((data) => {
-        setIsAuthPopupOpen(true);
-        onRegister(true);
-
-        setRegisterData({
-          email: '',
-          password: '',
-        });
-      })
-      .catch((err) => {
-        onRegister(false);
-        setIsAuthPopupOpen(true);
-
-        console.error(err);
-      });
+    onRegister({ registerData, setRegisterData });
   }
 
   // эффект для перенаправления на страницу с авторизацией
@@ -83,9 +66,9 @@ function Register(props) {
       <p className="sign__registred">
         Уже зарегистрированы?
         {' '}
-        <a href="/sign-in" rel="noreferrer" className="sign__login-link">
+        <Link to="/sign-in" rel="noreferrer" className="sign__login-link">
           Войти
-        </a>
+        </Link>
       </p>
     </div>
   );

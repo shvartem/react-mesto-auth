@@ -1,11 +1,8 @@
 import { useState, useEffect } from 'react';
-import * as auth from '../utils/auth';
 
-function Login(props) {
-  const {
-    loggedIn, setSuccessRegister, onLogin, setEmail, setCurrentRoute, history,
-  } = props;
-
+function Login({
+  loggedIn, setSuccessRegister, onLogin, setCurrentRoute, history,
+}) {
   const [loginData, setLoginData] = useState({
     email: '',
     password: '',
@@ -23,19 +20,7 @@ function Login(props) {
   function handleSubmit(evt) {
     evt.preventDefault();
 
-    auth.authorize(loginData)
-      .then((data) => {
-        if (data?.token) {
-          localStorage.setItem('token', data.token);
-          setEmail(loginData.email);
-          onLogin(true);
-
-          setLoginData({
-            email: '',
-            password: '',
-          });
-        }
-      });
+    onLogin({ loginData, setLoginData });
   }
 
   useEffect(() => {

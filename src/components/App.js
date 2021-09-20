@@ -66,6 +66,42 @@ function App() {
     }
   }
 
+  function handleAuthorize({ loginData, setLoginData }) {
+    auth.authorize(loginData)
+      .then((data) => {
+        if (data?.token) {
+          localStorage.setItem('token', data.token);
+          setCurrentEmail(loginData.email);
+          setLoggedIn(true);
+
+          setLoginData({
+            email: '',
+            password: '',
+          });
+        }
+      })
+      .catch(console.error);
+  }
+
+  function handleRegister({ registerData, setRegisterData }) {
+    auth.register(registerData)
+      .then((data) => {
+        setIsAuthPopupOpen(true);
+        setSuccessRegister(true);
+
+        setRegisterData({
+          email: '',
+          password: '',
+        });
+      })
+      .catch((err) => {
+        setSuccessRegister(false);
+        setIsAuthPopupOpen(true);
+
+        console.error(err);
+      });
+  }
+
   // функция открытия попапа добавления карточки
   function handleAddPlaceClick() {
     setIsAddPlacePopupOpen(true);
@@ -219,7 +255,8 @@ function App() {
             setLoggedIn(true);
             history.push('/');
           }
-        });
+        })
+          .catch(console.error);
       }
     }
 
@@ -275,10 +312,9 @@ function App() {
             <Switch>
               <Route path="/sign-in">
                 <Login
-                  onLogin={setLoggedIn}
+                  onLogin={handleAuthorize}
                   loggedIn={loggedIn}
                   setSuccessRegister={setSuccessRegister}
-                  setEmail={setCurrentEmail}
                   setCurrentRoute={setCurrentRoute}
                   history={history}
                 />
@@ -289,15 +325,9 @@ function App() {
                   isAuthPopupOpen={isAuthPopupOpen}
                   setIsAuthPopupOpen={setIsAuthPopupOpen}
                   successRegister={successRegister}
-                  onRegister={setSuccessRegister}
+                  onRegister={handleRegister}
                   setCurrentRoute={setCurrentRoute}
                   history={history}
-                />
-                <InfoToolTip
-                  name="info-tool-tip"
-                  isOpen={isAuthPopupOpen}
-                  onClose={handleClosePopup}
-                  onSuccessRegister={successRegister}
                 />
               </Route>
 
@@ -317,6 +347,13 @@ function App() {
             </Switch>
 
             {loggedIn && <Footer />}
+
+            <InfoToolTip
+              name="info-tool-tip"
+              isOpen={isAuthPopupOpen}
+              onClose={handleClosePopup}
+              onSuccessRegister={successRegister}
+            />
 
             <AddPlacePopup
               isLoading={isAddPlacePopupLoading}
